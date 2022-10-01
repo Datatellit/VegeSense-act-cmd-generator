@@ -2,7 +2,7 @@
 #include "xliCommon.h"
 
 /* 设备名和设备Tag对应关系 */
-const char FStr_DevName[DevTag_Dummy + RelayKey_Dummy][10] = {"GW", "relay", "door", "LED", "Fan", "Zen", "watLvl", "relayKey", "Fan", "Valve", "Pump", "Reserved"};
+const char FStr_DevName[DevTag_Dummy + RelayKey_Dummy][10] = {"GW", "relay", "door", "LED", "Fan", "Zen", "watLvl", "relayKey", "Fan", "Pump", "Valve", "Cooler", "Internal"};
 
 //--------------------------------------------------
 // Tools & Helpers

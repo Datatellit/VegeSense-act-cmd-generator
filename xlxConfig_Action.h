@@ -5,6 +5,9 @@
 
 #include "xliCommon.h"
 
+/* 指定按1字节对齐 */ 
+#pragma pack(1)
+
 // Maximum commands within an action
 #ifndef MAX_COMMAND_PER_ACTION
 #define MAX_COMMAND_PER_ACTION      16

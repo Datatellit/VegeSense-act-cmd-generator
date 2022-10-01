@@ -189,9 +189,10 @@ typedef enum {
 typedef enum {
   RelayKey_All = 0,
   RelayKey_Fan,         // 继电器1：换气扇
-  RelayKey_Valve,       // 继电器2：电磁阀
-  RelayKey_Pump,        // 继电器3：水泵
-  RelayKey_Reserved,    // 继电器4：预留
+  RelayKey_Pump,        // 继电器2：水泵
+  RelayKey_Valve,       // 继电器3：电磁阀
+  RelayKey_Cooler,    	// 继电器4：冷风
+  RelayKey_Internal,    // 继电器5：内部保留（系统控制，不对外）
   RelayKey_Dummy
 } eRelayKey_t;
 
