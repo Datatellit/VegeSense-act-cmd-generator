@@ -78,7 +78,7 @@ typedef struct			// Exact 4 bytes
 	UC cmd;				// Action Command: 参见COMMAND，目前支持：
 						// CMD_SERIAL, CMD_POWER, CMD_COLOR, CMD_BRIGHTNESS, CMD_SCENARIO, CMD_CCT
 						// 其中CMD_SERIAL相当于PowerSwitch云命令
-	UC type;   			// Optional: type of operation according to devTag
+	UC delayTime;   	// Optional: 单位为秒。当大于0时，表示本条命令在上条指令完成后延时多少秒执行
 	UC paramLen;		// Length (bytes) of parameters (exact length of payload, must shorter than 12 bytes)
 } cmdItem_head_t;
 

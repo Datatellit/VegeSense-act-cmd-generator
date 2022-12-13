@@ -28,25 +28,25 @@ public:
     // Step 2
     //------------------------------------------------------------------
     // 添加命令：快速开关命令
-    void AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const UC _type = 0);
+    void AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const UC _delay = 0);
 
     // 添加命令：场景切换命令
-    void AddCmd_ChangeScenario(const UC _scenario, const UC _type = 0);
+    void AddCmd_ChangeScenario(const UC _scenario, const UC _delay = 0);
 
     // 添加命令：设备开关命令
-    void AddCmd_SetState(const UC _devTag, const UC _sw, const UC _type = 0, const US _opTime = 0);
+    void AddCmd_SetState(const UC _devTag, const UC _sw, const UC _delay = 0, const US _opTime = 0);
 
     // 添加命令：照明亮度
-    void AddCmd_BRControl(const UC _br, const UC _op = 0, const UC _type = 0, const US _opTime = 0);
+    void AddCmd_BRControl(const UC _br, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
 
     // 添加命令：照明波长
-    void AddCmd_WLControl(const US _wl, const UC _op = 0, const UC _type = 0, const US _opTime = 0);
+    void AddCmd_WLControl(const US _wl, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
 
     // 添加命令：调节亮度及波长命令
-    void AddCmd_LightControl(const UC _br, const US _wl, const UC _op = 0, const UC _type = 0, const US _opTime = 0);
+    void AddCmd_LightControl(const UC _br, const US _wl, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
 
     // 添加命令：风扇控制命令
-    void AddCmd_FanControl(const UC _speed, const UC _op = 0, const UC _type = 0);
+    void AddCmd_FanControl(const UC _speed, const UC _op = 0, const UC _delay = 0);
 
     //------------------------------------------------------------------
     // Step 3
