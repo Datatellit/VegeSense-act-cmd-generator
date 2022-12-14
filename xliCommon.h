@@ -199,6 +199,13 @@ typedef enum {
 /* 设备名和设备Tag对应关系 */
 extern const char FStr_DevName[DevTag_Dummy + RelayKey_Dummy][10];
 
+/* 继电器设备衍生定义 */
+#define DevTag_RelayFan             (DevTag_Dummy + RelayKey_Fan)
+#define DevTag_RelayPump            (DevTag_Dummy + RelayKey_Pump)
+#define DevTag_RelayValve           (DevTag_Dummy + RelayKey_Valve)
+#define DevTag_RelayCooler          (DevTag_Dummy + RelayKey_Cooler)
+#define DevTag_RelayInternal        (DevTag_Dummy + RelayKey_Internal)
+
 //--------------------------------------------------
 // Tools & Helpers
 //--------------------------------------------------
