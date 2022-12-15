@@ -28,25 +28,25 @@ public:
     // Step 2
     //------------------------------------------------------------------
     // 添加命令：快速开关命令
-    void AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const UC _delay = 0);
+    void AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const US _delay = 0);
 
     // 添加命令：场景切换命令
-    void AddCmd_ChangeScenario(const UC _scenario, const UC _delay = 0);
+    void AddCmd_ChangeScenario(const UC _scenario, const US _delay = 0);
 
     // 添加命令：设备开关命令
-    void AddCmd_SetState(const UC _devTag, const UC _sw, const UC _delay = 0, const US _opTime = 0);
+    void AddCmd_SetState(const UC _devTag, const UC _sw, const US _delay = 0, const US _opTime = 0);
 
     // 添加命令：照明亮度
-    void AddCmd_BRControl(const UC _br, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
+    void AddCmd_BRControl(const UC _br, const UC _op = 0, const US _delay = 0, const US _opTime = 0);
 
     // 添加命令：照明波长
-    void AddCmd_WLControl(const US _wl, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
+    void AddCmd_WLControl(const US _wl, const UC _op = 0, const US _delay = 0, const US _opTime = 0);
 
     // 添加命令：调节亮度及波长命令
-    void AddCmd_LightControl(const UC _br, const US _wl, const UC _op = 0, const UC _delay = 0, const US _opTime = 0);
+    void AddCmd_LightControl(const UC _br, const US _wl, const UC _op = 0, const US _delay = 0, const US _opTime = 0);
 
     // 添加命令：风扇控制命令
-    void AddCmd_FanControl(const UC _speed, const UC _op = 0, const UC _delay = 0);
+    void AddCmd_FanControl(const UC _speed, const UC _op = 0, const US _delay = 0);
 
     //------------------------------------------------------------------
     // Step 3
@@ -73,6 +73,9 @@ private:
     UC m_nCmdCnt;               // act-cmd列表中的命令数量
     UC m_nCmdIndex;             // 当前命令序号，从0开始，到_cmdCnt - 1，请依次添加
     US m_nPayloadLen;           // act-cmd列表的字节数 = m_nCmdCnt * sizeof(cmdItem_t)
+
+    // 秒数换算成DTIT压缩时长字节格式
+    UC Second2DelayTime(const US _seconds);
 
     //------------------------------------------------------------------
     // 消息数据结构

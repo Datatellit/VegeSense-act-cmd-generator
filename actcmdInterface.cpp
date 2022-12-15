@@ -38,13 +38,13 @@ void CActCmdInterface::Init(const UC _uid, const UC _cmdCnt) {
 *   _delay：延时多少秒执行
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const UC _delay) {
+void CActCmdInterface::AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const US _delay) {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = _devTag;                  // DevTag
     lv_cmd->head.cmd = CMD_SERIAL;                  // 快速开关
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = 1;                      // 快速开关命令参数长度
     lv_cmd->body.sw = _sw;                          // 开关状态
 
@@ -59,14 +59,14 @@ void CActCmdInterface::AddCmd_PowerSwitch(const UC _devTag, const UC _sw, const 
 *           _delay：延时多少秒执行
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_ChangeScenario(const UC _scenario, const UC _delay)
+void CActCmdInterface::AddCmd_ChangeScenario(const UC _scenario, const US _delay)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = DevTag_GW;                // DevTag必须为DevTag_GW
     lv_cmd->head.cmd = CMD_SCENARIO;                // 切换场景
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = 1;                      // 场景切换命令参数长度
     lv_cmd->body.scenario_id = _scenario;           // 场景ID
 
@@ -84,14 +84,14 @@ void CActCmdInterface::AddCmd_ChangeScenario(const UC _scenario, const UC _delay
 *   _opTime: 渐变操作时长（秒），可选参数，仅对DevTag_LED设备有效
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_SetState(const UC _devTag, const UC _sw, const UC _delay, const US _opTime)
+void CActCmdInterface::AddCmd_SetState(const UC _devTag, const UC _sw, const US _delay, const US _opTime)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = _devTag;                  // DevTag
     lv_cmd->head.cmd = CMD_POWER;                   // 设备开关
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     // 设备开关命令参数长度
     if(_devTag == DevTag_LED) {
         lv_cmd->head.paramLen = sizeof(V_STATUS_t);
@@ -116,14 +116,14 @@ void CActCmdInterface::AddCmd_SetState(const UC _devTag, const UC _sw, const UC 
 *   _opTime: 渐变操作时长（秒），可选参数，仅对DevTag_LED设备有效
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_BRControl(const UC _br, const UC _op, const UC _delay, const US _opTime)
+void CActCmdInterface::AddCmd_BRControl(const UC _br, const UC _op, const US _delay, const US _opTime)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = DevTag_LED;               // DevTag必须为DevTag_LED
     lv_cmd->head.cmd = CMD_BRIGHTNESS;              // 级别调整
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = sizeof(V_PERCENTAGE_t); // 照明亮度命令参数长度
     lv_cmd->body.percentage.br = _br;               // 亮度
     lv_cmd->body.percentage.opt = _op;              // 操作符
@@ -143,14 +143,14 @@ void CActCmdInterface::AddCmd_BRControl(const UC _br, const UC _op, const UC _de
 *   _opTime: 渐变操作时长（秒），可选参数，仅对DevTag_LED设备有效
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_WLControl(const US _wl, const UC _op, const UC _delay, const US _opTime)
+void CActCmdInterface::AddCmd_WLControl(const US _wl, const UC _op, const US _delay, const US _opTime)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = DevTag_LED;               // DevTag必须为DevTag_LED
     lv_cmd->head.cmd = CMD_CCT;                     // 照明波长
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = sizeof(V_LEVEL_t);      // 照明波长命令参数长度
     lv_cmd->body.wavL.wl = _wl;                     // 色温或波长
     lv_cmd->body.wavL.opt = _op;                    // 操作符
@@ -171,14 +171,14 @@ void CActCmdInterface::AddCmd_WLControl(const US _wl, const UC _op, const UC _de
 *   _opTime: 渐变操作时长（秒），可选参数，仅对DevTag_LED设备有效
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_LightControl(const UC _br, const US _wl, const UC _op, const UC _delay, const US _opTime)
+void CActCmdInterface::AddCmd_LightControl(const UC _br, const US _wl, const UC _op, const US _delay, const US _opTime)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = DevTag_LED;               // DevTag必须为DevTag_LED
     lv_cmd->head.cmd = CMD_COLOR;                   // 亮度及波长
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = sizeof(V_HUE_t);        // 亮度及波长命令参数长度
     lv_cmd->body.br_wl.br = _br;                    // 亮度
     lv_cmd->body.br_wl.wl = _wl;                    // 色温或波长
@@ -198,14 +198,14 @@ void CActCmdInterface::AddCmd_LightControl(const UC _br, const US _wl, const UC 
 *   _delay：延时多少秒执行
 * @retval	
 ***************************************************************/
-void CActCmdInterface::AddCmd_FanControl(const UC _speed, const UC _op, const UC _delay)
+void CActCmdInterface::AddCmd_FanControl(const UC _speed, const UC _op, const US _delay)
 {
     // 指向当前命令
     cmdItem_t *lv_cmd = m_pCmdList + m_nCmdIndex;
 
     lv_cmd->head.devTag = DevTag_Fan;               // DevTag必须为DevTag_Fan
     lv_cmd->head.cmd = CMD_BRIGHTNESS;              // 级别调整
-    lv_cmd->head.delayTime = _delay;                // 延时多少秒执行
+    lv_cmd->head.delayTime = Second2DelayTime(_delay);      // 延时执行
     lv_cmd->head.paramLen = sizeof(V_WIND_t);       // 风速命令参数长度
     lv_cmd->body.wind.speed = _speed;               // 风扇开关和风速
     lv_cmd->body.wind.opt = _op;                    // 操作符
@@ -228,4 +228,18 @@ US CActCmdInterface::Build(char **_pstrActCmd)
     // 返回字符串指针和长度
     *_pstrActCmd = m_strOutput;
     return(GetMsgStringLen());
+}
+
+// 秒数换算成DTIT压缩时长字节格式
+UC CActCmdInterface::Second2DelayTime(const US _seconds)
+{
+    UC lv_byteTime;
+    if(_seconds < 0x80) {
+        lv_byteTime = (UC)_seconds;
+    } else if(_seconds >= 7620) {
+        lv_byteTime = 0xFF;
+    } else {
+        lv_byteTime = 0x80 | (UC)(_seconds / 60);
+    }
+    return(lv_byteTime);
 }

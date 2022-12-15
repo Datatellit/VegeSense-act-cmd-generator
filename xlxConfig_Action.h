@@ -69,6 +69,13 @@ typedef struct			// 6 Bytes
 	UC opt;				// 低4位为br控制方式，高4位是cct控制方式
 } V_HUE_t;
 
+/* 时长 */
+#define rSet_ActCmd_DelayDuration(_msg, _val)    BF_SET((_msg).delayTime, _val, 0, 7)
+#define mGet_ActCmd_DelayDuration(_msg)         BF_GET((_msg).delayTime, 0, 7)
+/* 单位：0-秒，1-分钟 */
+#define rSet_ActCmd_DelayUnit(_msg, _val)      	BF_SET((_msg).delayTime, _val, 7, 1)
+#define mGet_ActCmd_DelayUnit(_msg)           	BF_GET((_msg).delayTime, 7, 1)
+
 typedef struct			// Exact 4 bytes
 #ifdef PACK
 	__attribute__((packed))
@@ -78,7 +85,9 @@ typedef struct			// Exact 4 bytes
 	UC cmd;				// Action Command: 参见COMMAND，目前支持：
 						// CMD_SERIAL, CMD_POWER, CMD_COLOR, CMD_BRIGHTNESS, CMD_SCENARIO, CMD_CCT
 						// 其中CMD_SERIAL相当于PowerSwitch云命令
-	UC delayTime;   	// Optional: 单位为秒。当大于0时，表示本条命令在上条指令完成后延时多少秒执行
+	UC delayTime	:8;	// Optional: 单位为秒，DTIT压缩时长字节格式
+	//UC duration ：7;
+	//UC unit : 1;
 	UC paramLen;		// Length (bytes) of parameters (exact length of payload, must shorter than 12 bytes)
 } cmdItem_head_t;
 
