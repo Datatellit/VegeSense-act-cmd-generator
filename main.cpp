@@ -22,7 +22,7 @@ int main()
     lv_actCmd.AddCmd_ChangeScenario(1, 10);
     // --> 示例：第3条命令，照明亮度用60秒时间调整到100
     lv_actCmd.AddCmd_BRControl(100, 0, 0, 60);
-    // --> 示例：第4条命令，上条命令执行后再过15秒钟打开水泵
+    // --> 示例：第4条命令，上条命令执行后再过15分钟打开水泵
     lv_actCmd.AddCmd_SetState(DevTag_RelayPump, 1, 900);
     
     //------------------------------------------------------------------
