@@ -74,9 +74,6 @@ private:
     UC m_nCmdIndex;             // 当前命令序号，从0开始，到_cmdCnt - 1，请依次添加
     US m_nPayloadLen;           // act-cmd列表的字节数 = m_nCmdCnt * sizeof(cmdItem_t)
 
-    // 秒数换算成DTIT压缩时长字节格式
-    UC Second2DelayTime(const US _seconds);
-
     //------------------------------------------------------------------
     // 消息数据结构
     UC m_msg[SCMSG_HEADER_LEN + MAX_COMMAND_PER_ACTION * sizeof(cmdItem_t)];

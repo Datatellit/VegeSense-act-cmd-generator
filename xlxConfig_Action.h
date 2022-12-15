@@ -70,7 +70,7 @@ typedef struct			// 6 Bytes
 } V_HUE_t;
 
 /* 时长 */
-#define rSet_ActCmd_DelayDuration(_msg, _val)    BF_SET((_msg).delayTime, _val, 0, 7)
+#define rSet_ActCmd_DelayDuration(_msg, _val)   BF_SET((_msg).delayTime, _val, 0, 7)
 #define mGet_ActCmd_DelayDuration(_msg)         BF_GET((_msg).delayTime, 0, 7)
 /* 单位：0-秒，1-分钟 */
 #define rSet_ActCmd_DelayUnit(_msg, _val)      	BF_SET((_msg).delayTime, _val, 7, 1)

@@ -226,4 +226,36 @@ UC *StringToByte(char *pString, UC *pByte);
 char *ByteToString(UC *pByte, char *pString, const US len);
 US usCRC16(const UC * pucFrame, US usLen);
 
+/*
+  DTIT压缩时长字节格式：共8位，其中最高位为单位：0-秒，1-分钟；剩余7位为时长。
+  秒范围：0x00 - 0x7F (0-127秒)，分钟范围：0x80 - 0xFF (2-129分钟)，最大0xFF表示7740秒(129 * 60)。
+  当大于0时，表示本条命令在上条指令完成后延时多少秒执行。
+*/
+// DTIT压缩时长字节格式换算成秒数
+inline US DelayTime2Seconds(UC _byteTime) {
+    US _seconds; 
+    /* 单位：0-秒，1-分钟 */
+    if(BF_GET(_byteTime, 7, 1)) {
+        // 1-分钟
+        _seconds = ((US)(_byteTime & 0x7F) + 2) * 60;
+    } else {
+        // 0-秒
+        _seconds = _byteTime;
+    }
+    return(_seconds);
+}
+
+// 秒数换算成DTIT压缩时长字节格式
+inline UC Second2DelayTime(const US _seconds) {
+    UC lv_byteTime;
+    if(_seconds < 0x80) {
+        lv_byteTime = (UC)_seconds;
+    } else if(_seconds >= 7740) {
+        lv_byteTime = 0xFF;
+    } else {
+        lv_byteTime = 0x80 | (UC)((_seconds + 30) / 60 - 2);
+    }
+    return(lv_byteTime);
+}
+
 #endif /* xliCommon_h */

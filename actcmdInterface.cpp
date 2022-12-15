@@ -229,17 +229,3 @@ US CActCmdInterface::Build(char **_pstrActCmd)
     *_pstrActCmd = m_strOutput;
     return(GetMsgStringLen());
 }
-
-// 秒数换算成DTIT压缩时长字节格式
-UC CActCmdInterface::Second2DelayTime(const US _seconds)
-{
-    UC lv_byteTime;
-    if(_seconds < 0x80) {
-        lv_byteTime = (UC)_seconds;
-    } else if(_seconds >= 7620) {
-        lv_byteTime = 0xFF;
-    } else {
-        lv_byteTime = 0x80 | (UC)(_seconds / 60);
-    }
-    return(lv_byteTime);
-}
